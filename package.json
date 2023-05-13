@@ -1,0 +1,20 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "vinceye <vinceye.cm@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "webpack": "^5.82.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0"
+  }
+}
