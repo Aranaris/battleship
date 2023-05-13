@@ -1,1 +1,1 @@
-(()=>{"use strict";console.log(5)})();
+(()=>{"use strict";let t=document.querySelector("body"),i={length:3,timesHit:0,sunk:!1,hit:function(t=1){this.timesHit+=t,this.isSunk()},isSunk:function(){this.timesHit>=this.length&&(this.sunk=!0)}};i.hit(1),t.textContent=JSON.stringify(i),i.hit(1),i.hit(1),t.textContent+=JSON.stringify(i)})();
