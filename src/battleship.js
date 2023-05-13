@@ -17,11 +17,20 @@ function Ship (size) {
     return battleship;
 }
 
-function sum(a, b) {
-    return a + b;
-  }
+function GameBoard (size=10) {
+    var board = {
+        boardstate: [],
+    }
+
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            board.boardstate.push([i,j]);
+        }
+    }
+    return board;
+}
 
 export {
-    sum,
-    Ship
+    Ship,
+    GameBoard
 }
