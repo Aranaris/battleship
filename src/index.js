@@ -1,3 +1,11 @@
-import { sum } from "./battleship";
+import { Ship } from "./battleship";
 
-console.log(sum(2, 3));
+let body = document.querySelector('body');
+let testShip = Ship(3);
+testShip.hit(1);
+body.textContent = JSON.stringify(testShip);
+
+testShip.hit(1);
+testShip.hit(1);
+body.textContent += JSON.stringify(testShip);
+
