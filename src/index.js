@@ -11,5 +11,5 @@ body.textContent += JSON.stringify(testShip);
 
 let board = GameBoard(10);
 
-body.textContent += JSON.stringify(board.boardstate);
+body.textContent += JSON.stringify(board.emptySquares);
 
