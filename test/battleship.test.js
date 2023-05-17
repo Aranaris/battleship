@@ -48,10 +48,24 @@ test('placing ship on board', () => {
     expect(newBoard.ships).toMatchObject([{
         boardSquares: [[0,0],[0,1],[0,2]],
     }]);
-})
+});
 
 test('placing ship on board with invalid square', () => {
     let newBoard = GameBoard(10);
-    newBoard.placeShip([9,9], 'vertical', 3);
+    expect(newBoard.placeShip([9,9], 'vertical', 3)).toBe('Invalid placement');
     expect(newBoard.ships).toMatchObject([]);
-})
+});
+
+test('receiving an attack with coordinates input', () => {
+    let newBoard = GameBoard(10);
+    newBoard.placeShip([0,0], 'horizontal', 3);
+    expect(newBoard.receiveAttack([2,2])).toBe('Attack Missed!');
+    expect(newBoard.receiveAttack([2,2])).toBe('Invalid Coordinates (Missed Atk)');
+    expect(newBoard.receiveAttack([0,1])).toBe('Direct Hit!');
+    expect(newBoard.receiveAttack([0,1])).toBe('Invalid Coordinates (Ship Hit)');
+    expect(newBoard.receiveAttack([10,10])).toBe('Invalid Square');
+    expect(newBoard.ships[0].ship.timesHit).toBe(1);
+    expect(newBoard.receiveAttack([0,0])).toBe('Direct Hit!');
+    expect(newBoard.receiveAttack([0,2])).toBe('Direct Hit!');
+    expect(newBoard.ships[0].ship.sunk).toBe(true);
+});
