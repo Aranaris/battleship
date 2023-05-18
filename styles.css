@@ -1,0 +1,21 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: lightblue;
+    height: 100vh;
+}
+
+#game-board {
+    border-color: black;
+    border-style: solid;
+}
+
+body {
+    margin:0;
+}
+
+* {
+    border-color: red;
+    border-style: dashed;
+}
