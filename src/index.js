@@ -1,6 +1,9 @@
 import { Ship, GameBoard } from "./battleship";
+import { initialLoad } from "./interface";
 
-let body = document.querySelector('body');
+initialLoad();
+
+let body = document.querySelector('#game-board');
 let testShip = Ship(3);
 testShip.hit(1);
 body.textContent = JSON.stringify(testShip);

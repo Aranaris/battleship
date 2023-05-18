@@ -71,12 +71,24 @@ function GameBoard (size=10) {
                     } else if (hitSquare >= 0) {
                         i.ship.hit();
                         i.ship.hitLocation.push(hitSquare);
+                        if (i.ship.sunk) {
+                            this.checkAllSunk();
+                        }
                         return 'Direct Hit!';
                     }
                 }
                 return 'Invalid Square';
             }
         },
+        checkAllSunk: function() {
+            for (let i of this.ships) {
+                if (!i.ship.sunk) {
+                    return false;
+                }
+            }
+            this.allSunk = true;
+            return true;
+        }
     }
 
     for (let i = 0; i < size; i++) {
@@ -87,7 +99,20 @@ function GameBoard (size=10) {
     return board;
 }
 
+const Player = (name='Player1',type='Computer') => {
+    let playerName = name;
+    let playerType = type;
+    const greetPlayer = () => console.log(`${name} has entered the game`);
+    const setName = (newName) => playerName = newName;
+    const getName = playerName;
+    const makeMove = (location, board) => {
+        return board.receiveAttack(location);
+    }
+    return {greetPlayer, setName, getName, playerType, makeMove};
+}
+
 export {
     Ship,
-    GameBoard
+    GameBoard,
+    Player,
 }

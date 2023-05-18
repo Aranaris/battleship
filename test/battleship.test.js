@@ -1,8 +1,4 @@
-import { Ship, GameBoard } from "../src/battleship";
-
-// test('adds 1 + 2 to equal 3', () => {
-//   expect(sum(1, 2)).toBe(3);
-// });
+import { Ship, GameBoard, Player } from "../src/battleship";
 
 test('create new ship object', () => {
     let ship1 = Ship(4);
@@ -68,4 +64,13 @@ test('receiving an attack with coordinates input', () => {
     expect(newBoard.receiveAttack([0,0])).toBe('Direct Hit!');
     expect(newBoard.receiveAttack([0,2])).toBe('Direct Hit!');
     expect(newBoard.ships[0].ship.sunk).toBe(true);
+    expect(newBoard.allSunk).toBe(true);
 });
+
+test('creating a player and making move', () => {
+ let newPlayer = Player('testname', 'human');
+ expect(newPlayer).toMatchObject({
+    getName: 'testname',
+    playerType: 'human',
+ });
+})
