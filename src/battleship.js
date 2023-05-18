@@ -99,16 +99,32 @@ function GameBoard (size=10) {
     return board;
 }
 
-const Player = (name='Player1',type='Computer') => {
+const Player = (playerBoard, name='Player1',type='Computer') => {
+    let board = playerBoard;
     let playerName = name;
     let playerType = type;
+    let validMoves = [];
     const greetPlayer = () => console.log(`${name} has entered the game`);
     const setName = (newName) => playerName = newName;
     const getName = playerName;
-    const makeMove = (location, board) => {
-        return board.receiveAttack(location);
+    const makeMove = (board, location) => {
+        if (location) {
+            return board.receiveAttack(location);
+        } else {
+            return _generateMove();
+        }
     }
-    return {greetPlayer, setName, getName, playerType, makeMove};
+    const _generateMove = () => {
+        let move = Math.floor(Math.random() * validMoves.length);
+        return validMoves.splice(move, 1)[0];
+    }
+
+    for (let i = 0; i < playerBoard.size; i++) {
+        for (let j = 0; j < playerBoard.size; j++) {
+            validMoves.push([i,j]);
+        }
+    }
+    return {validMoves, board, greetPlayer, setName, getName, playerType, makeMove};
 }
 
 export {

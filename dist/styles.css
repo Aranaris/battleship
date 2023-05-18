@@ -3,16 +3,23 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: lightblue;
-    height: 100vh;
 }
 
 #game-board {
     border-color: black;
     border-style: solid;
+    display: grid;
+    justify-content: space-around;
 }
 
 body {
     margin:0;
+}
+
+.board-square {
+    border: dashed;
+    border-color: gray;
+    aspect-ratio: 1;
 }
 
 * {

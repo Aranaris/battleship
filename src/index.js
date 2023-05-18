@@ -1,18 +1,12 @@
-import { Ship, GameBoard } from "./battleship";
-import { initialLoad } from "./interface";
+import newGameSetup from "./game-engine";
+import { initialLoad, generateBoard } from "./interface";
 
 initialLoad();
+let newGame = newGameSetup(10);
+let playerOne = newGame[0];
+let playerTwo = newGame[1];
 
-let body = document.querySelector('#game-board');
-let testShip = Ship(3);
-testShip.hit(1);
-body.textContent = JSON.stringify(testShip);
+generateBoard(playerOne.board);
 
-testShip.hit(1);
-testShip.hit(1);
-body.textContent += JSON.stringify(testShip);
 
-let board = GameBoard(10);
-
-body.textContent += JSON.stringify(board.emptySquares);
 

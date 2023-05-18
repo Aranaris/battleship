@@ -1,11 +1,9 @@
 import { GameBoard, Player } from "./battleship";
 
-function newGameSetup (players = [new Player('PlayerOne', 'human'), new Player('PlayerTwo', 'computer')], boardSize = 10) {
+function newGameSetup (boardSize = 10) {
+    let players = [Player(new GameBoard(boardSize), 'PlayerOne', 'human'), Player(new GameBoard(boardSize), 'PlayerTwo', 'computer')];
     let player1 = players[0];
     let player2 = players[1];
-
-    player1.board = new GameBoard(boardSize);
-    player2.board = new GameBoard(boardSize);
 
     player1.board.placeShip([0,0], 'horizontal', 2);
     player1.board.placeShip([1,0], 'horizontal', 3);

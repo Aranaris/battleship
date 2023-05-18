@@ -68,9 +68,11 @@ test('receiving an attack with coordinates input', () => {
 });
 
 test('creating a player and making move', () => {
- let newPlayer = Player('testname', 'human');
- expect(newPlayer).toMatchObject({
-    getName: 'testname',
-    playerType: 'human',
+    let newBoard = GameBoard(10);
+    let newPlayer = Player(newBoard, 'testname', 'human');
+    expect(newPlayer).toMatchObject({
+        board: newBoard,
+        getName: 'testname',
+        playerType: 'human',
  });
 })
