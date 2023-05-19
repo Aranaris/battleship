@@ -31,12 +31,16 @@ function GameBoard (size=10) {
             for (let i = 0; i < ship.length; i++) {
                 let square = -1;
                 if (orientation == 'horizontal') {
+                    let x = location[0];
+                    let y = location[1] + i;
                     square = this.emptySquares.findIndex( (element) => {
-                        return element[0] === location[0] && element[1] === location[1] + i;
+                        return element[0] === x && element[1] === y;
                     });
                 } else {
+                    let x = location[0] + i;
+                    let y = location[1];
                     square = this.emptySquares.findIndex( (element) => {
-                        return element[0] === location[0] + i && element[1] === location[1];
+                        return element[0] === x && element[1] === y;
                     });
                 }
                 if (square === -1) {return 'Invalid placement'}
