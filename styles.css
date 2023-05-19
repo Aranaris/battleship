@@ -9,7 +9,8 @@
     border-color: black;
     border-style: solid;
     display: grid;
-    justify-content: space-around;
+    justify-content: center;
+    padding: 10px;
 }
 
 body {
@@ -25,4 +26,16 @@ body {
 * {
     border-color: red;
     border-style: dashed;
+}
+
+.square-hit {
+    background-color: lightgreen;
+}
+
+.square-miss {
+    background-color: pink;
+}
+
+.square-ship {
+    background-color: blueviolet;
 }
