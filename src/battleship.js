@@ -60,7 +60,7 @@ function GameBoard (size=10) {
                 })
             if (square >= 0) {
                 this.missedAttacks.push(this.emptySquares.splice(square, 1)[0]);
-                return 'Attack Missed!';
+                return 'miss';
             } else if (this.missedAttacks.findIndex( (element) => {
                 return element[0] === location[0] && element[1] === location[1];
             }) >= 0) {
@@ -78,7 +78,7 @@ function GameBoard (size=10) {
                         if (i.ship.sunk) {
                             this.checkAllSunk();
                         }
-                        return 'Direct Hit!';
+                        return 'hit';
                     }
                 }
                 return 'Invalid Square';

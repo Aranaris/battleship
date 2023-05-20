@@ -6,6 +6,11 @@
 }
 
 #game-board {
+    display: flex;
+    flex-direction: row;
+}
+
+#player-board, #opponent-board {
     border-color: black;
     border-style: solid;
     display: grid;
@@ -38,4 +43,8 @@ body {
 
 .square-ship {
     background-color: blueviolet;
+}
+
+.square-ship.square-hit {
+    background-color: orange;
 }

@@ -13,28 +13,49 @@ function resetBoard(playerBoard) {
     generateBoard(playerBoard);
 }
 
-function generateBoard(playerBoard) {
-    let displayBoard = document.querySelector('#game-board');
-    displayBoard.style['grid-template-columns'] = `repeat(${playerBoard.size}, minmax(10px, 1fr)`;
-    displayBoard.style['grid-template-rows'] = `repeat(${playerBoard.size}, minmax(10px, 1fr)`;
+function generateBoard(players) {
+    let playerBoard = players[0].board;
+    let oppBoard = players[1].board;
+    let displayPlayerBoard = document.querySelector('#player-board');
+    displayPlayerBoard.style['grid-template-columns'] = `repeat(${playerBoard.size}, minmax(10px, 1fr)`;
+    displayPlayerBoard.style['grid-template-rows'] = `repeat(${playerBoard.size}, minmax(10px, 1fr)`;
     for (let x = 0; x < playerBoard.size; x++) {
         for (let y = 0; y < playerBoard.size; y++) {
-            const newSquare = document.createElement('div');
+            let newSquare = document.createElement('div');
             newSquare.classList.add('board-square');
             newSquare.dataset.row = x;
             newSquare.dataset.column = y;
             newSquare.textContent = `(${x}, ${y})`;
-            displayBoard.appendChild(newSquare);
+            displayPlayerBoard.appendChild(newSquare);
+        }
+    }
+
+    let displayOppBoard = document.querySelector('#opponent-board');
+    displayOppBoard.style['grid-template-columns'] = `repeat(${oppBoard.size}, minmax(10px, 1fr)`;
+    displayOppBoard.style['grid-template-rows'] = `repeat(${oppBoard.size}, minmax(10px, 1fr)`;
+    for (let x = 0; x < oppBoard.size; x++) {
+        for (let y = 0; y < oppBoard.size; y++) {
+            let newSquare = document.createElement('div');
+            newSquare.classList.add('board-square');
+            newSquare.dataset.row = x;
+            newSquare.dataset.column = y;
+            newSquare.textContent = `(${x}, ${y})`;
+            displayOppBoard.appendChild(newSquare);
         }
     }
 }
 
-function updateBoard(playerBoard) {
-    for (let ship of playerBoard.ships) {
-        for (let i of ship.boardSquares) {
-            updateSquareStyle([i[0],i[1]], 'place-ship');
+function updateBoard(playerBoard, action, location=null, hidden=false) {
+    if (action === 'place-ship') {
+        for (let ship of playerBoard.ships) {
+            for (let i of ship.boardSquares) {
+                updateSquareStyle([i[0],i[1]], action);
+            }
         }
+    } else {
+        updateSquareStyle(location, action);
     }
+    
 }
 
 function getSquareElement(location) {
@@ -54,6 +75,10 @@ function updateSquareStyle(location, action) {
         updateSquare.classList.add('square-miss');
     }
 
+}
+
+function addClickEvent(location) {
+    
 }
 
 

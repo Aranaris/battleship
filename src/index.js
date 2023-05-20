@@ -3,17 +3,21 @@ import { initialLoad, generateBoard, updateBoard } from "./interface";
 
 initialLoad();
 let newGame = newGameSetup(10);
-let playerOne = newGame[0];
-let playerTwo = newGame[1];
 
-generateBoard(playerOne.board);
-placeTestShips(newGame)
+generateBoard(newGame);
+placeTestShips(newGame);
 
 setTimeout(() => {
-    updateBoard(playerOne.board);    
-}, 5000);
+    updateBoard(newGame[0].board, 'place-ship');    
+}, 3000);
 
+let turnOne = newGame[0].board.receiveAttack([0,0]);
+let turnTwo = newGame[0].board.receiveAttack([3,2]);
 
+setTimeout(() => {
+    updateBoard(newGame[0].board, turnOne, [0,0]);
+    updateBoard(newGame[0].board, turnTwo, [3,2]);    
+}, 6000);
 
 
 
