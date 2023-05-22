@@ -23,6 +23,7 @@ function generateBoard(players) {
         for (let y = 0; y < playerBoard.size; y++) {
             let newSquare = document.createElement('div');
             newSquare.classList.add('board-square');
+            newSquare.dataset.player = 'player';
             newSquare.dataset.row = x;
             newSquare.dataset.column = y;
             newSquare.textContent = `(${x}, ${y})`;
@@ -37,9 +38,16 @@ function generateBoard(players) {
         for (let y = 0; y < oppBoard.size; y++) {
             let newSquare = document.createElement('div');
             newSquare.classList.add('board-square');
+            newSquare.dataset.player = 'opponent';
             newSquare.dataset.row = x;
             newSquare.dataset.column = y;
             newSquare.textContent = `(${x}, ${y})`;
+            newSquare.addEventListener('click', () => {
+                let move = oppBoard.receiveAttack([x,y]);
+                if (move === 'hit' || move === 'miss') {
+                    updateSquareStyle([x,y], move, 'opponent');
+                }
+            });
             displayOppBoard.appendChild(newSquare);
         }
     }
@@ -49,23 +57,21 @@ function updateBoard(playerBoard, action, location=null, hidden=false) {
     if (action === 'place-ship') {
         for (let ship of playerBoard.ships) {
             for (let i of ship.boardSquares) {
-                updateSquareStyle([i[0],i[1]], action);
+                updateSquareStyle([i[0],i[1]], action, 'player');
             }
         }
     } else {
-        updateSquareStyle(location, action);
+        updateSquareStyle(location, action, 'player');
     }
     
 }
 
-function getSquareElement(location) {
-    let x = location[0];
-    let y = location[1];
-    return document.querySelector(`[data-row="${x}"][data-column="${y}"]`);
+function getSquareElement(location, playerInfo='player') {
+    return document.querySelector(`[data-player="${playerInfo}"][data-row="${location[0]}"][data-column="${location[1]}"]`);
 }
 
-function updateSquareStyle(location, action) {
-    let updateSquare = getSquareElement(location);
+function updateSquareStyle(location, action, playerInfo='player') {
+    let updateSquare = getSquareElement(location, playerInfo);
 
     if (action == 'hit') {
         updateSquare.classList.add('square-hit');
@@ -77,16 +83,11 @@ function updateSquareStyle(location, action) {
 
 }
 
-function addClickEvent(location) {
-    
-}
-
-
 export {
     initialLoad, 
     resetBoard,
     generateBoard,
     updateSquareStyle,
-    updateBoard
+    updateBoard,
 }
 
