@@ -1,3 +1,5 @@
+import { newGame } from "./game-engine";
+
 function initialLoad() {
     const header = document.querySelector('#header');
     header.textContent = 'testheader content';
@@ -7,13 +9,16 @@ function initialLoad() {
     playerInfo.textContent = 'player info goes here';
 }
 
-function resetBoard(playerBoard) {
-    let displayBoard = document.querySelector('#game-board');
-    displayBoard.replaceChildren();
-    generateBoard(playerBoard);
+function resetBoard(game) {
+    let playerBoard = document.querySelector('#player-board');
+    playerBoard.replaceChildren();
+    let oppBoard = document.querySelector('#opponent-board');
+    oppBoard.replaceChildren();
+    generateBoards(game);
 }
 
-function generateBoard(players) {
+function generateBoards(game) {
+    let players = game.players;
     let playerBoard = players[0].board;
     let oppBoard = players[1].board;
     let displayPlayerBoard = document.querySelector('#player-board');
@@ -43,10 +48,15 @@ function generateBoard(players) {
             newSquare.dataset.column = y;
             newSquare.textContent = `(${x}, ${y})`;
             newSquare.addEventListener('click', () => {
+                if (game.gameEnd || players[0].getName !== game.turn) {
+                    return;
+                }
                 let move = oppBoard.receiveAttack([x,y]);
                 if (move === 'hit' || move === 'miss') {
                     updateSquareStyle([x,y], move, 'opponent');
+                    game.nextTurn();
                 }
+                
             });
             displayOppBoard.appendChild(newSquare);
         }
@@ -86,7 +96,7 @@ function updateSquareStyle(location, action, playerInfo='player') {
 export {
     initialLoad, 
     resetBoard,
-    generateBoard,
+    generateBoards,
     updateSquareStyle,
     updateBoard,
 }
