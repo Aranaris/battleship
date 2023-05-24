@@ -2,7 +2,7 @@ import { GameBoard, Player } from "./battleship";
 import { resetBoard, updateBoard } from "./interface";
 
 function newGameSetup (boardSize = 10) {
-    let players = [Player(new GameBoard(boardSize), 'PlayerOne', 'Human'), Player(new GameBoard(boardSize), 'PlayerTwo', 'Computer')];
+    let players = [Player(new GameBoard(boardSize), 'John Smith', 'Human'), Player(new GameBoard(boardSize), 'Robot', 'Computer')];
 
     return players;
 }
@@ -30,6 +30,7 @@ function newGame () {
         players: [],
         turn: '',
         gameEnd: false,
+        lastMessage: '',
 
         checkGameEnd: function() {
             for (let player of this.players) {
@@ -60,6 +61,7 @@ function newGame () {
                 //     this.nextTurn();
                 // }, 1000);
                 this.computerMove(this.players[0].board, compMove);
+                return compMove;
             }
         },
 
@@ -68,6 +70,7 @@ function newGame () {
             placeTestShips(this.players);
             this.turn = this.players[0].getName;
             resetBoard(this);
+            updateBoard(this.players[0].board, 'place-ship');
         },
 
         computerMove: async function(board, move) {
@@ -78,7 +81,7 @@ function newGame () {
                 }, 1000);
             })
             return p;
-        }
+        },
     }
 
     return game;
