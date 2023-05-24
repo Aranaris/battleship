@@ -15,6 +15,16 @@ function resetBoard(game) {
     let oppBoard = document.querySelector('#opponent-board');
     oppBoard.replaceChildren();
     generateBoards(game);
+
+    let resetButton = document.createElement('button');
+    resetButton.id = 'reset-button';
+    resetButton.textContent = 'Restart Game';
+    resetButton.addEventListener('click', () => {
+        game.reset();
+    })
+    let gameInfo = document.querySelector('#game-info');
+    gameInfo.replaceChildren();
+    gameInfo.appendChild(resetButton);
 }
 
 function generateBoards(game) {

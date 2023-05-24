@@ -2,7 +2,7 @@ import { GameBoard, Player } from "./battleship";
 import { resetBoard, updateBoard } from "./interface";
 
 function newGameSetup (boardSize = 10) {
-    let players = [Player(new GameBoard(boardSize), 'PlayerOne', 'human'), Player(new GameBoard(boardSize), 'PlayerTwo', 'Computer')];
+    let players = [Player(new GameBoard(boardSize), 'PlayerOne', 'Human'), Player(new GameBoard(boardSize), 'PlayerTwo', 'Computer')];
 
     return players;
 }
@@ -52,11 +52,14 @@ function newGame () {
             } else if (this.turn === this.players[1].getName) {
                 this.turn = this.players[0].getName;
             }
-            
+
             if (this.players[1].playerType === 'Computer' && this.turn === this.players[1].getName) {
                 let compMove = this.players[1].makeMove(this.players[1].board);
-                updateBoard(this.players[0].board, this.players[0].board.receiveAttack(compMove), compMove);
-                this.nextTurn();
+                // setTimeout(() => {
+                //     updateBoard(this.players[0].board, this.players[0].board.receiveAttack(compMove), compMove);
+                //     this.nextTurn();
+                // }, 1000);
+                this.computerMove(this.players[0].board, compMove);
             }
         },
 
@@ -65,6 +68,16 @@ function newGame () {
             placeTestShips(this.players);
             this.turn = this.players[0].getName;
             resetBoard(this);
+        },
+
+        computerMove: async function(board, move) {
+            let p = new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(updateBoard(board, board.receiveAttack(move), move));
+                    resolve(this.nextTurn());
+                }, 1000);
+            })
+            return p;
         }
     }
 
