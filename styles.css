@@ -3,11 +3,34 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: lightblue;
+    min-height: 100vh;
+}
+
+#header {
+    font-size: x-large;
+    font-weight: bold;
+    padding: 2%;
+}
+
+#player-info {
+    font-size: large;
+    padding: 2%;
 }
 
 #game-board {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#game-info {
+    margin: auto;
+}
+
+#footer {
+    font-style: italic;
+    font-size: small;
+    text-align: right;
 }
 
 #player-board, #opponent-board {
@@ -26,11 +49,6 @@ body {
     border: dashed;
     border-color: gray;
     aspect-ratio: 1;
-}
-
-* {
-    border-color: red;
-    border-style: dashed;
 }
 
 .square-hit {
