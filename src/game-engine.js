@@ -69,6 +69,7 @@ function newGame () {
             this.players = newGameSetup();
             placeTestShips(this.players);
             this.turn = this.players[0].getName;
+            this.gameEnd = false;
             resetBoard(this);
             updateBoard(this.players[0].board, 'place-ship');
         },
